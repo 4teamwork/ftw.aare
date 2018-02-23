@@ -10,7 +10,7 @@ DESCRIPTION = 'A Shell Command which displays the current temperature of the Aar
 EMAIL = 'steven.pilatschek@gmail.com'
 AUTHOR = 'Steven Pilatschek'
 URL = "https://github.com/4teamwork/ftw.aare"
-version = "1.0"
+version = '1.1.dev0'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
