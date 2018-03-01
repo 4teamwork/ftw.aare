@@ -7,6 +7,7 @@ from setuptools import find_packages, setup
 # Package meta-data.
 NAME = 'ftw.aare'
 DESCRIPTION = 'A Shell Command which displays the current temperature of the Aare in Bern, Switzerland'
+LONG_DESCRIPTION = 'For more information please visit https://github.com/4teamwork/ftw.aare'
 EMAIL = 'steven.pilatschek@gmail.com'
 AUTHOR = 'Steven Pilatschek'
 URL = "https://github.com/4teamwork/ftw.aare"
@@ -21,7 +22,7 @@ setup(
     name=NAME,
     version=version,
     description=DESCRIPTION,
-    long_description=DESCRIPTION,
+    long_description=LONG_DESCRIPTION,
     author=AUTHOR,
     author_email=EMAIL,
     url=URL,
