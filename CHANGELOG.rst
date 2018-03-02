@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1 (unreleased)
+1.1 (2018-03-02)
 ----------------
 
 - Added parameter "--statistics" to display the hottest and coldest temperature each day of the last 7 days

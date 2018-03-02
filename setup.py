@@ -12,7 +12,7 @@ EMAIL = 'info@4teamwork.ch'
 MAINTAINER = "Steven Pilatschek"
 AUTHOR = '4teamwork AG'
 URL = "https://github.com/4teamwork/ftw.aare"
-version = '1.1.dev0'
+version = '1.1'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
