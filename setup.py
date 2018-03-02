@@ -8,8 +8,9 @@ from setuptools import find_packages, setup
 NAME = 'ftw.aare'
 DESCRIPTION = 'A Shell Command which displays the current temperature of the Aare in Bern, Switzerland'
 LONG_DESCRIPTION = 'For more information please visit https://github.com/4teamwork/ftw.aare'
-EMAIL = 'steven.pilatschek@gmail.com'
-AUTHOR = 'Steven Pilatschek'
+EMAIL = 'info@4teamwork.ch'
+MAINTAINER = "Steven Pilatschek"
+AUTHOR = '4teamwork AG'
 URL = "https://github.com/4teamwork/ftw.aare"
 version = '1.1.dev0'
 
@@ -25,6 +26,7 @@ setup(
     long_description=LONG_DESCRIPTION,
     author=AUTHOR,
     author_email=EMAIL,
+    maintainer=MAINTAINER,
     url=URL,
     packages=find_packages(exclude=('tests',)),
     entry_points={
