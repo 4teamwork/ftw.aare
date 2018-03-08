@@ -1,11 +1,13 @@
 import datetime
 import itertools
 import locale
+import pdb
 
 import click
 import requests
 
 LANGUAGE = "en"
+session = requests.Session()
 
 
 def _(s):
@@ -45,7 +47,7 @@ def set_language(lang):
 
 def display_current_temp():
     api_url = 'http://aare.schwumm.ch/aare.json'
-    response = requests.get(api_url)
+    response = session.get(api_url)
     aare_json = response.json()
     click.echo(_("Current temperature of the aare: {}° C").format(aare_json["temperature"]))
 
@@ -57,7 +59,7 @@ def display_stats():
     headers = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) '
                       'Chrome/50.0.2661.102 Safari/537.36'}
-    response = requests.get(api_url, params, headers=headers)
+    response = session.get(api_url, params=params, headers=headers)
     response_json = response.json()
     temperatures = response_json['data']['temperature']
     dates = [datetime.datetime.strptime(item, '%Y-%m-%d %H:%M:%S') for item in response_json['data']['datetime']]
