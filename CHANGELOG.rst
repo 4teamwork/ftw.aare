@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2 (unreleased)
+1.2 (2018-03-15)
 ----------------
 
 - Implemented automatic language detection when tool is called without "--language"
