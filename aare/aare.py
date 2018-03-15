@@ -1,25 +1,55 @@
 import datetime
 import itertools
+import locale
+import pdb
 
 import click
 import requests
 
+LANGUAGE = "en"
+session = requests.Session()
+
+
+def _(s):
+    global LANGUAGE
+
+    de = {"Current temperature of the aare: {}° C": "Aktuelle Temperatur der Aare: {}° C",
+          "{}: min {}° C, max {}° C": "{}: min {}° C, max {}° C"}
+
+    if LANGUAGE == "de":
+        return de[s]
+    else:
+        return s
+
 
 @click.command()
 @click.option('--statistics', help='show the hottest and the coolest temperature of the last 7 days', is_flag="True")
-def aare(statistics):
+@click.option('--language', default="", help='set the language of the output. Possible languages: "de" (German), '
+                                             '"en" (English). The output is displayed in the OS language by default, '
+                                             'it will also be displayed english if an invalid argument is passed.')
+def aare(statistics, language):
     """A simple command which displays the current aare temperature"""
+    if language != "":
+        set_language(language)
+    else:
+        set_system_language()
+
     if statistics:
         display_stats()
     else:
         display_current_temp()
 
 
+def set_language(lang):
+    global LANGUAGE
+    LANGUAGE = lang
+
+
 def display_current_temp():
     api_url = 'http://aare.schwumm.ch/aare.json'
-    response = requests.get(api_url)
+    response = session.get(api_url)
     aare_json = response.json()
-    click.echo("Current temperature of the aare: {}° C".format(aare_json["temperature"]))
+    click.echo(_("Current temperature of the aare: {}° C").format(aare_json["temperature"]))
 
 
 def display_stats():
@@ -29,7 +59,7 @@ def display_stats():
     headers = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) '
                       'Chrome/50.0.2661.102 Safari/537.36'}
-    response = requests.get(api_url, params, headers=headers)
+    response = session.get(api_url, params=params, headers=headers)
     response_json = response.json()
     temperatures = response_json['data']['temperature']
     dates = [datetime.datetime.strptime(item, '%Y-%m-%d %H:%M:%S') for item in response_json['data']['datetime']]
@@ -42,8 +72,15 @@ def display_stats():
         min_temp = min(temperatures)
         max_temp = max(temperatures)
         day_string = key.strftime('%Y-%m-%d')
-        output = "{}: min {}° C, max {}° C".format(day_string, min_temp, max_temp)
+        output = _("{}: min {}° C, max {}° C").format(day_string, min_temp, max_temp)
         print(output)
+
+
+def set_system_language():
+    locale_tuple = locale.getdefaultlocale()
+    lang = locale_tuple[0]
+    if lang == "de_DE" or lang == "de_CH":
+        set_language("de")
 
 
 if __name__ == '__main__':

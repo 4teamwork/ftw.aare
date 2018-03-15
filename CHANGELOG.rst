@@ -4,7 +4,8 @@ Changelog
 1.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Implemented automatic language detection when tool is called without "--language"
+- Added parameter "--language" to display the output in a different language. Possible arguments: "de", "en"
 
 
 1.1 (2018-03-02)
