@@ -19,6 +19,8 @@ REQUIRED = [
     'requests', 'click'
 ]
 
+EXTRAS = {'tests': ['pytest', 'path.py']}
+
 setup(
     name=NAME,
     version=version,
@@ -33,6 +35,7 @@ setup(
          'console_scripts': ['aare=aare.aare:aare'],
     },
     install_requires=REQUIRED,
+    extras_require=EXTRAS,
     include_package_data=True,
     license='MIT',
     classifiers=[
